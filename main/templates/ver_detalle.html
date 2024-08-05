@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mt-5">Vuelo {{ detalle.codigo }}</h1>
+
+    <div class="card mt-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Origen: {{ detalle.origen }}</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>Fecha: {{ detalle.fecha }}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Destino: {{ detalle.destino }}</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>Avión: {{ detalle.avion.modelo }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="mt-5">Pasajeros</h1>
+
+        <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Vacuna</th>
+                    <th scope="col">Fecha nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pasajero in pasajeros %}
+                        <tr>
+                            <td>{{ pasajero.nombre }}</td>
+                            <td>{{ pasajero.rut }}</td>
+                            <td>{{ pasajero.vacuna }}</td>
+                            <td>{{ pasajero.fecha_nacimiento}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div class="col md 2"></div>
+
+        </div>
+
+{%endblock%}

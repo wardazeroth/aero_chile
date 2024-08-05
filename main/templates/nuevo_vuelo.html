@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="row mt-5">
+    <div class="col-12 col-md-4 offset-md-4">
+        <h3 class="text-center">Crea un nuevo viaje</h3>
+        <form action="{% url 'nuevo_vuelo' %}" method="post" class="mt-5">
+            {% csrf_token %}
+                <div class="mb-2">
+                    {{ form.codigo.label_tag }}
+                    {{ form.codigo }}
+                </div>
+                <div class="mb-2">
+                    {{ form.origen.label_tag }}
+                    {{ form.origen }}
+                </div>
+                <div class="mb-2">
+                    {{ form.fecha.label_tag }}
+                    {{ form.fecha }}
+                </div>
+                <div class="mb-2">
+                    {{ form.destino.label_tag }}
+                    {{ form.destino }}
+                </div>
+                <div class="mb-2">
+                    <select class="form-select" name="avion" id="" required>
+                        <option value>
+                            Selecciona tu avión:
+                        </option>                        
+                        {%for avion in aviones%}
+                            <option value="{{ avion.id }}">{{ avion.modelo }}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            <input type="submit" value="Crear" class="btn btn-outline-success mt-3">
+        </form>
+    </div>
+</div>
+{%endblock%}

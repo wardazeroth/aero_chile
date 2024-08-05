@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-2 mt-5">
+      <h3>Viajes</h3>
+    </div>
+    <div class="col-md-8"></div>
+    <div class="col-md-2">
+      <a href="{% url 'nuevo_vuelo' %}" class="btn btn-primary mt-5">Crea Viaje</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 mt-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        {%for vuelo in vuelos%}
+        <tbody>
+          {%if vuelo.estado == 'agendado'%}
+          <tr class="table-info">
+          {%elif vuelo.estado == 'completado'%}
+          <tr class="table-warning">
+          {%endif%}
+            <td>{{ vuelo.codigo }}</td>
+            <td>{{ vuelo.origen }}</td>
+            <td>{{ vuelo.destino }}</td>
+            <td>{{ vuelo.fecha }}</td>
+            {%if vuelo.estado != 'completado'%}
+              <td>
+                <div class="row">
+                  <div class="col-md-6">
+                    <a href="{% url 'nuevo_pasajero' vuelo.codigo %}" class="btn btn-primary bg-transparent text-black">Add pasajero</a>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="{% url 'completar' vuelo.codigo %}" class="btn btn-primary bg-transparent text-black">Completar</a>
+                  </div>
+                </div>
+                
+              </td>
+            {%else%}
+              <td></td>
+            {%endif%}
+            <td><a href="{% url 'detalle_vuelo' vuelo.codigo %}">Ver detalle</a></td>      
+          </tr>
+        {%endfor%}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+{% endblock %}
